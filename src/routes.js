@@ -1,6 +1,5 @@
 import React from "react";
 import { Route } from "react-router-dom";
-
 import Tervetuloa from "./pages/Tervetuloa";
 import Ohjesivu from "./pages/Ohjesivu";
 

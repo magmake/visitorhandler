@@ -8,7 +8,9 @@ const { theme } = themes;
 const TextBoxOtsikko = (props) => {
   return (
     <Typography variant="h1">
-      <div>{props.text}</div>
+      <div style={{ marginTop: "2vh", marginLeft: "1vh", marginRight: "1vh" }}>
+        {props.text}
+      </div>
     </Typography>
   );
 };
@@ -16,7 +18,9 @@ const TextBoxOtsikko = (props) => {
 const TextBoxTeksti = (props) => {
   return (
     <Typography variant="subtitle1">
-      <div>{props.text}</div>
+      <div style={{ marginTop: "2vh", marginLeft: "2vh", marginRight: "2vh" }}>
+        {props.text}
+      </div>
     </Typography>
   );
 };
@@ -30,6 +34,6 @@ TextBoxOtsikko.propTypes = {
 
 export { TextBoxOtsikko, TextBoxTeksti };
 //siistimpänä wrapataan themeprovider-komponenttiin
-export const ThemeWrappedTextBoxes = (props) => {
+export const WrappedTextBoxesTheme = (props) => {
   return <ThemeProvider theme={theme}>{props.children}</ThemeProvider>;
 };

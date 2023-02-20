@@ -1,6 +1,13 @@
+import React, { useEffect } from "react";
 import { createTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  getFromLocalStorage,
+  setToLocalStorage,
+  saveStylesToLocalStorage,
+} from "./localstorage";
 
-// Themes for the app
+// sisältää ohjelman teemat
 const theme = createTheme({
   typography: {
     h1: {
@@ -47,16 +54,30 @@ const modalTheme = createTheme({
         padding: "40px",
       },
     },
-    MuiButton: {
-      root: {
-        position: "absolute",
-        bottom: "1rem",
-        left: "50%",
-        transform: "translateX(-50%)",
-      },
-    },
   },
 });
-const themes = { theme, modalTheme };
+
+const useStyles = makeStyles(() => ({
+  root: {
+    backgroundColor: "rgb(0, 174, 239)",
+    height: "5vh",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    top: 0,
+    right: 0,
+    paddingRight: "20px",
+    textAlign: "right",
+  },
+  button: {
+    fontSize: "20px",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "40%",
+    height: "40%",
+  },
+}));
+
+const themes = { theme, modalTheme, useStyles };
 
 export default themes;

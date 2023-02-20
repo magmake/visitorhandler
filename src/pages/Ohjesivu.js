@@ -2,7 +2,7 @@ import React from "react";
 import {
   TextBoxOtsikko,
   TextBoxTeksti,
-  ThemeWrappedTextBoxes,
+  WrappedTextBoxesTheme,
 } from "../components/Textbox";
 import {
   ohjeita1_fin,
@@ -15,12 +15,12 @@ import {
 const Ohjesivu = () => {
   return (
     <div>
-      <ThemeWrappedTextBoxes>
+      <WrappedTextBoxesTheme>
         <TextBoxOtsikko text={ohjeita1_fin}></TextBoxOtsikko>
         <TextBoxTeksti text={ohjeita2_fin}></TextBoxTeksti>
         <TextBoxTeksti text={ohjeita3_fin}></TextBoxTeksti>
         <TextBoxTeksti text={ohjeita4_fin}></TextBoxTeksti>
-      </ThemeWrappedTextBoxes>
+      </WrappedTextBoxesTheme>
     </div>
   );
 };

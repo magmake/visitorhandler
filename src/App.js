@@ -1,17 +1,23 @@
 import React from "react";
 import ClockBar from "./fragments/Clockbar";
 import Tervetuloa from "./pages/Tervetuloa";
-import TermsOfService from "./components/Terms";
+import Ohjesivu from "./pages/Ohjesivu";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 
+//headerinä toimii "kellotaulu" ja määritetään routet
 const App = (props) => {
   return (
     <div className="App">
       <header>
         <ClockBar />
       </header>
-      <Tervetuloa />
-      <TermsOfService />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Tervetuloa />} />
+          <Route path="/ohjesivu" element={<Ohjesivu />} />
+        </Routes>
+      </Router>
     </div>
   );
 };
