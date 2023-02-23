@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import themes from "../themes";
 
+//yläpalkkiin liitettävä kello, joka päivittyy kerran sekunnissa
 //määritellään yläpalkin teema käytettäväksi
 
 // kellon päivitys 1000ms:n välein

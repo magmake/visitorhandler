@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TextField, Select, MenuItem, Button } from "@material-ui/core";
+import Modal from "@material-ui/core/Modal";
 import {
   TextBoxOtsikko,
   TextBoxTeksti,
@@ -7,7 +8,7 @@ import {
 } from "../components/Textbox";
 import { lomakeOtsikko } from "../components/strings";
 import { makeStyles } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // lomakkeelle tyylittelyä
 const useStyles = makeStyles((theme) => ({
@@ -54,9 +55,23 @@ const Lomake = () => {
   const [email, setEmail] = useState("");
   const [puhelinnumero, setPuhelinnumero] = useState("");
   const [valinta, setValinta] = useState("");
+  const [open, setOpen] = useState(false);
 
   const classes = useStyles();
-  const history = useHistory();
+  const history = useNavigate();
+
+  const handleCancel = () => {
+    setOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpen(false);
+  };
+
+  const handleConfirmCancel = () => {
+    setOpen(false);
+    history("/");
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -70,23 +85,11 @@ const Lomake = () => {
       valinta
     );
     // lomakkeen tiedot console.logiin
-    const handleCancel = () => {
-      setOpen(true);
-    };
-
-    const handleCloseModal = () => {
-      setOpen(false);
-    };
-
-    const handleConfirmCancel = () => {
-      setOpen(false);
-      history.push("/");
-    };
   };
   return (
     <div>
       <WrappedTextBoxesTheme>
-        <TextBoxOtsikko> text={lomakeOtsikko}</TextBoxOtsikko>
+        <TextBoxOtsikko text={lomakeOtsikko}></TextBoxOtsikko>
       </WrappedTextBoxesTheme>
       <form className={classes.form} onSubmit={handleSubmit}>
         <TextField
