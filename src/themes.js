@@ -1,11 +1,5 @@
-import React, { useEffect } from "react";
 import { createTheme } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  getFromLocalStorage,
-  setToLocalStorage,
-  saveStylesToLocalStorage,
-} from "./localstorage";
 
 // sisältää ohjelman teemat
 const theme = createTheme({
@@ -29,55 +23,80 @@ const theme = createTheme({
   },
 });
 
-const modalTheme = createTheme({
-  overrides: {
-    MuiModal: {
-      root: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      },
-    },
-    MuiGrid: {
-      container: {
-        height: "100vh",
-        justifyContent: "center",
-        alignItems: "center",
-      },
-    },
-    MuiPaper: {
-      root: {
-        backgroundColor: "#fff",
-        border: "2px solid #000",
-        boxShadow:
-          "0px 3px 5px -1px rgba(0,0,0,0.2), 0px 5px 8px 0px rgba(0,0,0,0.14), 0px 1px 14px 0px rgba(0,0,0,0.12)",
-        padding: "40px",
-      },
-    },
-  },
-});
-
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "rgb(0, 174, 239)",
-    height: "5vh",
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
-    top: 0,
-    right: 0,
-    paddingRight: "20px",
-    textAlign: "right",
+    alignItems: "center",
+    height: "5vh",
+    textAlign: "center",
+    color: "white",
   },
-  button: {
-    fontSize: "20px",
+  modal: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "90%",
+    height: "90%",
+    maxHeight: "90%",
+    overflowY: "auto",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  paper: {
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    width: "40%",
-    height: "40%",
+    padding: "20px",
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgb(0, 174, 239)",
+    color: "white",
+    "& h2": {
+      margin: "0 0 10px 0",
+    },
+  },
+  buttonContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  leftButton: {
+    backgroundColor: "green",
+    color: "white",
+    fontWeight: "bold",
+    border: "solid black",
+    borderRadius: "5px",
+    padding: "10px 20px",
+    marginLeft: "10%",
+    "&:hover": {
+      cursor: "pointer",
+    },
+    "&:disabled": {
+      opacity: 0.2,
+      cursor: "default",
+    },
+  },
+  rightButton: {
+    backgroundColor: "red",
+    color: "white",
+    border: "solid black",
+    borderRadius: "5px",
+    padding: "10px 20px",
+    marginRight: "10%",
+    textDecoration: "none",
+    "&:hover": {
+      cursor: "pointer",
+    },
   },
 }));
 
-const themes = { theme, modalTheme, useStyles };
+const themes = { theme, useStyles };
 
 export default themes;
