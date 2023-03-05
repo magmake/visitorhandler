@@ -7,7 +7,7 @@ const { theme } = themes;
 //otsikko
 const TextBoxOtsikko = (props) => {
   return (
-    <Typography variant="h1">
+    <Typography variant="h3">
       <div style={{ marginTop: "2vh", marginLeft: "1vh", marginRight: "1vh" }}>
         {props.text}
       </div>
