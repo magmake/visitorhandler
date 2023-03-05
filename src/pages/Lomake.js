@@ -9,6 +9,7 @@ import {
 import { lomakeOtsikko } from "../components/strings";
 import { makeStyles } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 // lomakkeelle tyylittelyä
 const useStyles = makeStyles((theme) => ({
@@ -49,42 +50,80 @@ const useStyles = makeStyles((theme) => ({
 
 // etusivu, ohjeita yms.
 const Lomake = () => {
+  // lomakkeen tiedot
   const [etunimi, setEtunimi] = useState("");
   const [sukunimi, setSukunimi] = useState("");
   const [yritys, setYritys] = useState("");
   const [email, setEmail] = useState("");
   const [puhelinnumero, setPuhelinnumero] = useState("");
-  const [valinta, setValinta] = useState("");
+  const [vastuuhenkilo, setVastuuhenkilo] = useState("");
   const [open, setOpen] = useState(false);
+  const [omaVastuuhenkilo, setOmavastuuhenkilo] = useState("");
 
+  //tyylit
   const classes = useStyles();
+  //navigointi sivustolla
   const history = useNavigate();
 
+  //avataan modal, jos peruutetaan lomakkeen täyttö
   const handleCancel = () => {
     setOpen(true);
   };
 
+  // suljetaan peruuta-ikkuna
   const handleCloseModal = () => {
     setOpen(false);
   };
 
+  //varmistetaan, haluaako käyttäjä peruuttaa -> palataan etusivulle
   const handleConfirmCancel = () => {
     setOpen(false);
     history("/");
   };
+  // jos vastaanottavaa henkilöä ei löydy alasvetovalikosta, voi määritellä itse
+  const handleChange = (event) => {
+    if (event.target.value === "Muu") {
+      setOpen(true);
+    } else {
+      setOpen(false);
+      setVastuuhenkilo(event.target.value);
+    }
+  };
 
-  const handleSubmit = (event) => {
+  const handleOmavastuuhenkiloBlur = () => {
+    setVastuuhenkilo(omaVastuuhenkilo);
+    setOpen(false);
+  };
+  const handleOmaVastuuhenkiloChange = (event) => {
+    setOmavastuuhenkilo(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(
-      "Lomakkeen tiedot:",
+    const tiedot = {
       etunimi,
       sukunimi,
       yritys,
       email,
       puhelinnumero,
-      valinta
-    );
-    // lomakkeen tiedot console.logiin
+      vastuuhenkilo,
+    };
+    const jsonTiedot = `${etunimi}_${sukunimi}_${email}`;
+    const formData = new FormData();
+    formData.append("tiedot", JSON.stringify(tiedot, null, 2));
+    formData.append("jsonNimi", jsonTiedot);
+
+    try {
+      const response = await fetch("http://localhost:3000", {
+        method: "POST",
+        mode: "no-cors",
+        body: formData,
+      });
+      const data = await response.json();
+      console.log("SENDER DATA: ", data);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>
@@ -125,13 +164,26 @@ const Lomake = () => {
           onChange={(event) => setPuhelinnumero(event.target.value)}
         />
         <Select
-          value={valinta}
+          MenuProps={{ disablePortal: true }}
+          value={vastuuhenkilo}
           className={classes.field}
-          onChange={(event) => setValinta(event.target.value)}
+          onChange={(event) => setVastuuhenkilo(event.target.value)}
         >
+          <MenuItem value="">-- Valitse vastuuhenkilö --</MenuItem>
           <MenuItem value="Reijo">Reijo</MenuItem>
           <MenuItem value="Reko">Reko</MenuItem>
+          <MenuItem value="Muu">Muu</MenuItem>
         </Select>
+        {vastuuhenkilo === "Muu" && (
+          <TextField
+            label="Muu vastuuhenkilö"
+            className={classes.field}
+            value={vastuuhenkilo}
+            onChange={handleOmaVastuuhenkiloChange}
+            onBlur={handleOmavastuuhenkiloBlur}
+            style={{ display: open ? "block" : "none" }}
+          />
+        )}
         <Button type="submit" className={classes.field}>
           Lähetä
         </Button>
