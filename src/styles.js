@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
+  //ohjesivu
   container: {
     display: "flex",
     alignItems: "center",
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
       border: "3px solid black",
     },
   },
+  //tietolauseke
   modalContent: {
     backgroundColor: "white",
     padding: "20px",
@@ -79,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: "none",
   },
+  //etusivun avausnappi
   avausNappiTeema: {
     fontWeight: "bold",
     border: "solid black",
@@ -92,6 +95,75 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.primary.main,
       color: "rgb(255, 255, 255)",
     },
+  },
+  //lomake
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginTop: "10px",
+  },
+  field: {
+    margin: "10px 0",
+  },
+  cancelButton: {
+    position: "fixed",
+    bottom: "10%",
+    left: "10%",
+  },
+  modal: {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(4),
+    minWidth: "300px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  buttonContainerLomake: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
+    marginTop: theme.spacing(2),
+  },
+  //hallinta
+  hallintaPaper: {
+    position: "absolute",
+    alignItems: "center",
+    width: "400px",
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+  },
+  hallintaCard: {
+    margin: "0 auto",
+    padding: "1rem",
+    backgroundColor: "#fff",
+    boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.1)",
+    borderRadius: "4px",
+    width: "50%",
+    flexGrow: 1,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    textAlign: "left",
+    alignItems: "flex-start",
+    loginButton: {
+      marginTop: "1rem",
+    },
+  },
+  hallintaModal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
 }));
 

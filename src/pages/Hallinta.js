@@ -1,51 +1,13 @@
 import React, { useState, useEffect } from "react";
-import {
-  Button,
-  Modal,
-  makeStyles,
-  Card,
-  CardContent,
-} from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  card: {
-    margin: "0 auto",
-    padding: "1rem",
-    backgroundColor: "#fff",
-    boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.1)",
-    borderRadius: "4px",
-    width: "50%",
-    flexGrow: 1,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    textAlign: "left",
-    alignItems: "flex-start",
-    loginButton: {
-      marginTop: "1rem",
-    },
-  },
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  paper: {
-    position: "absolute",
-    alignItems: "center",
-    width: "400px",
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-  },
-}));
+import { Button, Modal, Card, CardContent } from "@material-ui/core";
+import useStyles from "../styles";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { format } from "date-fns";
 
 const Hallinta = () => {
   const [data, setData] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
   const [open, setOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
@@ -73,8 +35,24 @@ const Hallinta = () => {
     setOpen(false);
   };
 
+  //datepickerin handler
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+  // määritetään dateformat täsmäämään käyttätiedon kanssa
+  const dateFormat = "dd.MM.yyyy";
+  // käydään läpi kaikki tiedostot
+  const filteredData = data.filter((item) => {
+    if (selectedDate) {
+      // verrataan tiedoston date ja datepickerin date, jos sama, niin näytetään tiedostot
+      const formattedDate = format(selectedDate, dateFormat);
+      return item.date === formattedDate;
+    }
+    return true;
+  });
+
   const handleLogin = () => {
-    // Tässä voit tarkistaa käyttäjätunnuksen ja salasanan ja asettaa loggedIn-muuttujan true/false
+    // Hallintapaneelin salasana. Määrittää loggedIn-muuttujan true/false
     if (username === "käyttäjä" && password === "salasana") {
       setLoggedIn(true);
       handleClose();
@@ -85,12 +63,14 @@ const Hallinta = () => {
   return (
     <div>
       <h1>Hallintapaneeli</h1>
+      <DatePicker selected={selectedDate} onChange={handleDateChange} />
       {loggedIn ? (
         <div>
-          {data.map((item) => (
-            <Card key={item.uniqueId} className={classes.card}>
+          {filteredData.map((item) => (
+            <Card key={item.uniqueId} className={classes.hallintaCard}>
               <CardContent>
                 <h2>{item.name} </h2>
+                <p>Id: {item.uniqueId}</p>
                 <p>Etunimi: {item.etunimi} </p>
                 <p>Sukunimi: {item.sukunimi} </p>
                 <p>Yritys: {item.yritys} </p>
@@ -114,8 +94,12 @@ const Hallinta = () => {
         </div>
       )}
 
-      <Modal open={open} onClose={handleClose}>
-        <div className={classes.paper}>
+      <Modal
+        className={classes.hallintaModal}
+        open={open}
+        onClose={handleClose}
+      >
+        <div className={classes.hallintaPaper}>
           <h2>Kirjaudu hallintapaneeliin</h2>
           <p>Syötä käyttäjätiedot</p>
           <input

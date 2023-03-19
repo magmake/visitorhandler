@@ -11,8 +11,6 @@ import { version } from "react";
 import { TextBoxOtsikko, TextBoxTeksti } from "../components/Textbox";
 import { tervetuloa_fin, tervetuloa2_fin } from "../components/strings";
 
-// useStyles-tyylit
-
 // etusivu, ohjeita yms.
 const Tervetuloa = () => {
   const [open, setOpen] = useState(false);

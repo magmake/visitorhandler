@@ -3,47 +3,11 @@ import { TextField, Select, MenuItem, Button } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
 import { TextBoxOtsikko, WrappedTextBoxesTheme } from "../components/Textbox";
 import { lomakeOtsikko } from "../components/strings";
-import { makeStyles } from "@material-ui/core";
+import {} from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
+import useStyles from "../styles";
 
 import https from "https";
-
-// lomakkeelle tyylittelyä
-const useStyles = makeStyles((theme) => ({
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    marginTop: "10px",
-  },
-  field: {
-    margin: "10px 0",
-  },
-  cancelButton: {
-    position: "fixed",
-    bottom: "10%",
-    left: "10%",
-  },
-  modal: {
-    position: "fixed",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(4),
-    minWidth: "300px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  buttonContainer: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "100%",
-    marginTop: theme.spacing(2),
-  },
-}));
 
 // etusivu, ohjeita yms.
 const Lomake = ({ dateTime }) => {
@@ -67,6 +31,7 @@ const Lomake = ({ dateTime }) => {
   const formattedTime = dateTime.toLocaleString("fi-FI", {
     hour: "2-digit",
     minute: "2-digit",
+    second: "2-digit",
   });
 
   //tyylit
@@ -233,7 +198,7 @@ const Lomake = ({ dateTime }) => {
       <Modal open={open} onClose={handleCloseModal}>
         <div className={classes.modal}>
           <h2>Haluatko varmasti peruuttaa lomakkeen täyttämisen?</h2>
-          <div className={classes.buttonContainer}>
+          <div className={classes.buttonContainerLomake}>
             <Button
               onClick={handleConfirmCancel}
               variant="contained"
