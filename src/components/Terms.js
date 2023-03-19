@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import { ThemeProvider } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
-import theme from "../themes";
-import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import { Link } from "react-router-dom";
 import { tietosuojaseloste_teksti } from "./strings";
@@ -36,20 +33,20 @@ const TermsOfService = ({ handleClose, open }) => {
               </div>
             </div>
             <div className={classes.buttonContainer}>
-              <Button
-                variant="contained"
-                className={classes.leftButton}
-                disabled={!isChecked}
-              >
-                <Link to="/lomake" className={classes.link}>
+              <Link to="/ohjesivu" className={classes.link}>
+                <Button
+                  variant="contained"
+                  className={classes.leftButton}
+                  disabled={!isChecked}
+                >
                   Hyväksyn ehdot
-                </Link>
-              </Button>
-              <Button variant="contained" className={classes.rightButton}>
-                <Link onClick={handleClose} className={classes.link}>
+                </Button>
+              </Link>
+              <Link onClick={handleClose} className={classes.link}>
+                <Button variant="contained" className={classes.rightButton}>
                   En hyväksy
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

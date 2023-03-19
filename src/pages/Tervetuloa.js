@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import chipslogo from "./media/chipstersfood_logo.png";
 import baronslogo from "./media/baronsfood_logo.png";
 import Button from "@material-ui/core/Button";
@@ -8,11 +8,7 @@ import theme from "../themes";
 import useStyles from "../styles";
 import { version } from "react";
 
-import {
-  TextBoxOtsikko,
-  TextBoxTeksti,
-  WrappedTextBoxesTheme,
-} from "../components/Textbox";
+import { TextBoxOtsikko, TextBoxTeksti } from "../components/Textbox";
 import { tervetuloa_fin, tervetuloa2_fin } from "../components/strings";
 
 // useStyles-tyylit
@@ -28,10 +24,8 @@ const Tervetuloa = () => {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <WrappedTextBoxesTheme>
-          <TextBoxOtsikko text={tervetuloa_fin}></TextBoxOtsikko>
-          <TextBoxTeksti text={tervetuloa2_fin}></TextBoxTeksti>
-        </WrappedTextBoxesTheme>
+        <TextBoxOtsikko text={tervetuloa_fin}></TextBoxOtsikko>
+        <TextBoxTeksti text={tervetuloa2_fin}></TextBoxTeksti>
         <div style={{ display: "flex" }}>
           <div style={{ width: "50%" }}>
             <img

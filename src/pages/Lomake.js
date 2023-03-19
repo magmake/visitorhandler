@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { TextField, Select, MenuItem, Button } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
-import {
-  TextBoxOtsikko,
-  TextBoxTeksti,
-  WrappedTextBoxesTheme,
-} from "../components/Textbox";
+import { TextBoxOtsikko, WrappedTextBoxesTheme } from "../components/Textbox";
 import { lomakeOtsikko } from "../components/strings";
 import { makeStyles } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
+import https from "https";
 
 // lomakkeelle tyylittelyä
 const useStyles = makeStyles((theme) => ({
@@ -49,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // etusivu, ohjeita yms.
-const Lomake = () => {
+const Lomake = ({ dateTime }) => {
   // lomakkeen tiedot
   const [etunimi, setEtunimi] = useState("");
   const [sukunimi, setSukunimi] = useState("");
@@ -60,6 +57,17 @@ const Lomake = () => {
   const [open, setOpen] = useState(false);
   const [omaVastuuhenkilo, setOmavastuuhenkilo] = useState("");
   const [naytaLomakeViesti, asetaNaytaLomakeViesti] = useState(false);
+
+  //formatoidaan datetime järkevämpään muotoon
+  const formattedDate = dateTime.toLocaleString("fi-FI", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  const formattedTime = dateTime.toLocaleString("fi-FI", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
   //tyylit
   const classes = useStyles();
@@ -82,7 +90,7 @@ const Lomake = () => {
     history("/");
   };
   // jos vastaanottavaa henkilöä ei löydy alasvetovalikosta, voi määritellä itse
-  const handleChange = (event) => {
+  /*const handleChange = (event) => {
     if (event.target.value === "Muu") {
       setOpen(true);
     } else {
@@ -90,6 +98,7 @@ const Lomake = () => {
       setVastuuhenkilo(event.target.value);
     }
   };
+  */
 
   const handleOmavastuuhenkiloBlur = () => {
     setVastuuhenkilo(omaVastuuhenkilo);
@@ -118,6 +127,8 @@ const Lomake = () => {
       email,
       puhelinnumero,
       vastuuhenkilo,
+      date: formattedDate,
+      time: formattedTime,
     };
     const jsonTiedot = `${etunimi}_${sukunimi}_${email}`;
     const formData = new FormData();
@@ -125,9 +136,8 @@ const Lomake = () => {
     formData.append("jsonNimi", jsonTiedot);
 
     try {
-      const response = await fetch("http://localhost:3000", {
+      const response = await fetch("https://localhost:443", {
         method: "POST",
-        mode: "no-cors",
         body: formData,
       });
       setLahetetty(true);

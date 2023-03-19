@@ -7,6 +7,18 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     height: "100vh",
   },
+  ohjeContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "10vh",
+  },
+  ohjeContainer2: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "20vh",
+  },
   hoveredCheckBox: {
     "&:hover": {
       cursor: "pointer",
@@ -57,7 +69,6 @@ const useStyles = makeStyles((theme) => ({
     border: "solid black",
     borderRadius: "10px",
     padding: "10px 20px",
-    textDecoration: "none",
     marginRight: "10%",
 
     "&:hover": {

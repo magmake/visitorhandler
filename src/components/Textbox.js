@@ -7,10 +7,8 @@ const { theme } = themes;
 //otsikko
 const TextBoxOtsikko = (props) => {
   return (
-    <Typography variant="h3">
-      <div style={{ marginTop: "2vh", marginLeft: "1vh", marginRight: "1vh" }}>
-        {props.text}
-      </div>
+    <Typography variant="h5">
+      <div>{props.text}</div>
     </Typography>
   );
 };
@@ -18,9 +16,7 @@ const TextBoxOtsikko = (props) => {
 const TextBoxTeksti = (props) => {
   return (
     <Typography variant="subtitle1">
-      <div style={{ marginTop: "2vh", marginLeft: "2vh", marginRight: "2vh" }}>
-        {props.text}
-      </div>
+      <div>{props.text}</div>
     </Typography>
   );
 };
