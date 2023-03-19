@@ -2,6 +2,9 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   //ohjesivu
+  root: {
+    width: "70%",
+  },
   container: {
     display: "flex",
     alignItems: "center",
@@ -47,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     marginTop: "20px",
+    margin: "20vh",
   },
   leftButton: {
     backgroundColor: "green",
@@ -107,9 +111,12 @@ const useStyles = makeStyles((theme) => ({
     margin: "10px 0",
   },
   cancelButton: {
-    position: "fixed",
-    bottom: "10%",
-    left: "10%",
+    position: "center",
+    bottom: "-20vh",
+    backgroundColor: "red",
+    color: "white",
+    border: "solid black",
+    borderRadius: "10px",
   },
   modal: {
     position: "fixed",
@@ -164,6 +171,18 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+  },
+  datePickerContainer: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "5px",
+    height: "5vh",
+  },
+  datePickerText: {
+    margin: 0,
+    marginBottom: "1rem",
   },
 }));
 

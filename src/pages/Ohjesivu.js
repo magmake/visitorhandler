@@ -2,7 +2,6 @@ import React from "react";
 import useStyles from "../styles";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-
 import { TextBoxOtsikko, TextBoxTeksti } from "../components/Textbox";
 import {
   ohjeita1_fin,
@@ -26,19 +25,21 @@ const Ohjesivu = () => {
       <div className={classes.ohjeContainer}>
         <TextBoxTeksti text={ohjeita4_fin}></TextBoxTeksti>
       </div>
-      <div>
-        <Button variant="contained" className={classes.avausNappiTeema}>
+      <div className={classes.buttonContainer}>
+        <div>
           <Link to="/lomake" className={classes.link}>
-            Hyväksyn ehdot
+            <Button variant="contained" className={classes.avausNappiTeema}>
+              Jatka
+            </Button>
           </Link>
-        </Button>
-      </div>
-      <div>
-        <Button variant="contained" className={classes.avausNappiTeema}>
+        </div>
+        <div>
           <Link to="/" className={classes.link}>
-            En hyväksy
+            <Button variant="contained" className={classes.avausNappiTeema}>
+              Poistu
+            </Button>
           </Link>
-        </Button>
+        </div>
       </div>
     </div>
   );

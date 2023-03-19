@@ -6,18 +6,27 @@ const theme = createTheme({
     h1: {
       fontSize: 16,
       textAlign: "center",
+      margin: "1px 0",
     },
     h2: {
-      fontSize: 10,
+      fontSize: 12,
       textAlign: "center",
+      margin: "16px 0",
+    },
+    h5: {
+      fontSize: 35,
+      textAlign: "center",
+      margin: "16px 0px",
     },
     body1: {
       fontSize: 14,
       textAlign: "center",
+      margin: "16px 0",
     },
     subtitle1: {
-      fontSize: 14,
+      fontSize: 30,
       textAlign: "center",
+      margin: "20px 50px",
     },
     fontFamily: "Arial, sans-serif",
   },

@@ -44,7 +44,7 @@ const Hallinta = () => {
   // käydään läpi kaikki tiedostot
   const filteredData = data.filter((item) => {
     if (selectedDate) {
-      // verrataan tiedoston date ja datepickerin date, jos sama, niin näytetään tiedostot
+      // verrataan tiedoston date ja datepickerin date, jos sama, niin valitaan ne tiedot
       const formattedDate = format(selectedDate, dateFormat);
       return item.date === formattedDate;
     }
@@ -63,9 +63,17 @@ const Hallinta = () => {
   return (
     <div>
       <h1>Hallintapaneeli</h1>
-      <DatePicker selected={selectedDate} onChange={handleDateChange} />
+
       {loggedIn ? (
         <div>
+          <div className={classes.datePickerContainer}>
+            <p className={classes.datePickerText}>valitse päivämäärä</p>
+            <DatePicker
+              selected={selectedDate}
+              onChange={handleDateChange}
+              dateFormat="dd.MM.yyyy"
+            />
+          </div>
           {filteredData.map((item) => (
             <Card key={item.uniqueId} className={classes.hallintaCard}>
               <CardContent>
