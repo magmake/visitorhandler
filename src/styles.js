@@ -4,12 +4,13 @@ const useStyles = makeStyles((theme) => ({
   //ohjesivu
   root: {
     width: "70%",
+    marginTop: "1vh",
   },
   container: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    height: "1++vh",
+    height: "1vh",
   },
   ohjeContainer: {
     display: "flex",
@@ -105,10 +106,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginTop: "10px",
+    marginTop: "20px",
   },
   field: {
-    margin: "10px 0",
+    margin: "5px 0",
   },
   cancelButton: {
     position: "center",
@@ -138,6 +139,18 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   //hallinta
+  datePickerContainer: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "5px",
+    height: "5vh",
+  },
+  datePickerText: {
+    margin: 0,
+    marginBottom: "1rem",
+  },
   hallintaPaper: {
     position: "absolute",
     alignItems: "center",
@@ -167,22 +180,27 @@ const useStyles = makeStyles((theme) => ({
       marginTop: "1rem",
     },
   },
+    hallintaCentered: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    hallintaLogin: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+    hallintaInput: {
+    margin: "0 10px",
+  },
   hallintaModal: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
-  datePickerContainer: {
+  hallintaButton: {
     display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
     alignItems: "center",
-    margin: "5px",
-    height: "5vh",
-  },
-  datePickerText: {
-    margin: 0,
-    marginBottom: "1rem",
+    justifyContent: "center",
   },
 }));
 

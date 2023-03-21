@@ -17,7 +17,7 @@ const Hallinta = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://localhost:443/data");
+        const response = await fetch("https://172.17.166.55:443/data");
         const jsonData = await response.json();
         setData(jsonData);
       } catch (error) {
@@ -96,9 +96,12 @@ const Hallinta = () => {
           <div>
             <h2>Kirjaudu sisään nähdäksesi tiedot</h2>
           </div>
-          <Button variant="contained" color="primary" onClick={handleOpen}>
-            Login
-          </Button>
+
+          <div className={classes.hallintaButton}>
+            <Button variant="contained" color="primary" onClick={handleOpen}>
+              Login
+            </Button>
+          </div>
         </div>
       )}
 
@@ -108,22 +111,48 @@ const Hallinta = () => {
         onClose={handleClose}
       >
         <div className={classes.hallintaPaper}>
-          <h2>Kirjaudu hallintapaneeliin</h2>
-          <p>Syötä käyttäjätiedot</p>
-          <input
-            type="text"
-            placeholder="Käyttäjänimi"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Salasana"
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div className={classes.hallintaCentered}>
+            <h2>Kirjaudu hallintapaneeliin</h2>
+          </div>
+          <div className={classes.hallintaCentered}>
+            <p>Syötä käyttäjätiedot</p>
+          </div>
+          <div className={classes.hallintaLogin}>
+            <div className={classes.hallintaInput}>
+              <input
+                type="text"
+                placeholder="Käyttäjänimi"
+                onChange={(e) => setUsername(e.target.value)}
+                style={{
+                  textAlign: "center",
+                  width: "100%",
+                  height: "80%",
+                  boxSizing: "border-box",
+                  padding: "8px 16px",
+                }}
+              />
+            </div>
+            <div className={classes.hallintaInput}>
+              <input
+                type="password"
+                placeholder="Salasana"
+                onChange={(e) => setPassword(e.target.value)}
+                style={{
+                  textAlign: "center",
+                  width: "100%",
+                  height: "80%",
+                  boxSizing: "border-box",
+                  padding: "8px 16px",
+                }}
+              />
+            </div>
+          </div>
           <br />
-          <Button variant="contained" color="primary" onClick={handleLogin}>
-            Kirjaudu hallintapaneeliin
-          </Button>
+          <div className={classes.hallintaButton}>
+            <Button variant="contained" color="primary" onClick={handleLogin}>
+              Kirjaudu hallintapaneeliin
+            </Button>
+          </div>
         </div>
       </Modal>
     </div>

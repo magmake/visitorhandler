@@ -5,20 +5,21 @@ import tonnikala from "./pages/media/tonnikala.jpg";
 import Hallinta from "./pages/Hallinta";
 import Ohjesivu from "./pages/Ohjesivu";
 import Lomake from "./pages/Lomake";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import { Box } from "@material-ui/core";
-
+import { FiLogIn } from "react-icons/fi";
 
 //otetaan kellonaika ja päivämäärä sekunnin välein
 const App = () => {
   const [dateTime, setDateTime] = useState(new Date());
+
   useEffect(() => {
     setInterval(() => setDateTime(new Date()), 1000);
   }, []);
 
   //passataan ClockBariin datetime-props. Passataan myös Lomakkeelle dateTime.
-  return (
+    return (
     <div
       style={{
         backgroundImage: `url(${tonnikala})`,
@@ -33,10 +34,13 @@ const App = () => {
         className="App"
         style={{ position: "relative", zIndex: 1, backgroundColor: "white" }}
       >
-        <header>
-          <ClockBar dateTime={dateTime} />
-        </header>
         <Router>
+          <header>
+            <ClockBar dateTime={dateTime} />
+            <Link to="/hallinta" style={{ position: "absolute", top: "10px", right: "10px" }}>
+            Hallinta
+          </Link>
+          </header>
           <Routes>
             <Route path="/" element={<Tervetuloa />} />
             <Route path="/ohjesivu" element={<Ohjesivu />} />
