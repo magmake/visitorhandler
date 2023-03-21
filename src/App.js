@@ -8,7 +8,7 @@ import Lomake from "./pages/Lomake";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import { Box } from "@material-ui/core";
-require("dotenv").config();
+
 
 //otetaan kellonaika ja päivämäärä sekunnin välein
 const App = () => {

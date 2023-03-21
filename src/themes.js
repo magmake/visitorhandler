@@ -6,7 +6,7 @@ const theme = createTheme({
     h1: {
       fontSize: 16,
       textAlign: "center",
-      margin: "1px 0",
+      margin: "5px 0",
     },
     h2: {
       fontSize: 12,
@@ -16,7 +16,7 @@ const theme = createTheme({
     h5: {
       fontSize: 35,
       textAlign: "center",
-      margin: "16px 0px",
+      margin: "20px 0px",
     },
     body1: {
       fontSize: 14,

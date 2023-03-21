@@ -3,11 +3,8 @@ import { TextField, Select, MenuItem, Button } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
 import { TextBoxOtsikko, WrappedTextBoxesTheme } from "../components/Textbox";
 import { lomakeOtsikko } from "../components/strings";
-import {} from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import useStyles from "../styles";
-
-import https from "https";
 
 // etusivu, ohjeita yms.
 const Lomake = ({ dateTime }) => {
@@ -21,7 +18,7 @@ const Lomake = ({ dateTime }) => {
   const [open, setOpen] = useState(false);
   const [omaVastuuhenkilo, setOmavastuuhenkilo] = useState("");
   const [naytaLomakeViesti, asetaNaytaLomakeViesti] = useState(false);
-
+    
   //formatoidaan datetime järkevämpään muotoon
   const formattedDate = dateTime.toLocaleString("fi-FI", {
     year: "numeric",
@@ -75,6 +72,7 @@ const Lomake = ({ dateTime }) => {
   const [lomakeLahetetty, setLahetetty] = useState(false);
   const [lomakeEilahetetty, setEilahetetty] = useState(false);
   const handleSubmit = async (event) => {
+        
     event.preventDefault();
     //näytetään viesti, että lomake lähetetty
     asetaNaytaLomakeViesti(true);
@@ -101,7 +99,7 @@ const Lomake = ({ dateTime }) => {
     formData.append("jsonNimi", jsonTiedot);
 
     try {
-      const response = await fetch("https://localhost:443", {
+      const response = await fetch("https://172.17.166.55:443", {
         method: "POST",
         body: formData,
       });
