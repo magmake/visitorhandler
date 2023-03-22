@@ -8,7 +8,6 @@ import Lomake from "./pages/Lomake";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import { Box } from "@material-ui/core";
-import { FiLogIn } from "react-icons/fi";
 
 //otetaan kellonaika ja päivämäärä sekunnin välein
 const App = () => {
