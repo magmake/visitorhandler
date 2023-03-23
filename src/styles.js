@@ -138,6 +138,16 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     marginTop: theme.spacing(2),
   },
+      valitseOtsikko: {
+    fontSize: "1.2rem",
+    fontWeight: 500,
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(1),
+  },
+  select: {
+    width: "100%",
+    marginBottom: theme.spacing(2),
+  },
   //hallinta
   datePickerContainer: {
     display: "flex",
@@ -201,6 +211,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+      textDecoration: "none",
   },
 }));
 

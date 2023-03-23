@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Modal, Card, CardContent } from "@material-ui/core";
 import useStyles from "../styles";
 import DatePicker from "react-datepicker";
+import { Link } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 
@@ -63,9 +64,19 @@ const Hallinta = () => {
   return (
     <div>
       <h1>Hallintapaneeli</h1>
+      
 
-      {loggedIn ? (
-        <div>
+  <div className={classes.hallintaButton}>
+    <Link to="/" className={classes.link}>
+      <Button variant="contained" color="secondary" className={classes.hallintaButton}>
+        Poistu
+      </Button>
+    </Link>
+  </div>
+
+        {loggedIn ? (
+        
+      <div>
           <div className={classes.datePickerContainer}>
             <p className={classes.datePickerText}>valitse päivämäärä</p>
             <DatePicker

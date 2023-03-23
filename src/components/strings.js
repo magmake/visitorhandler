@@ -1,5 +1,5 @@
 export const tervetuloa_fin =
-  "Tervetuloa Ab Chipsters Food Oy tuotantolaitokseen. Toivomme, että viihdytte luonamme";
+  "Tervetuloa Ab Chipsters Food Oy:n tuotantolaitokseen. Toivomme, että viihdytte luonamme";
 export const tervetuloa2_fin =
   "Ruuan tuoteturvallisuuden ja tuotteiden korkean laadun edellyttämän hygieniatason varmistamiseksi pyydämme teitä noudattamaan hygieniaohjeitamme";
 export const ohjeita1_fin =
