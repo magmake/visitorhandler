@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useApi from "../api.js";
 import messages from "../locales.js"; // tuodaan lokalisaatiotekstit
 import { FormattedMessage } from "react-intl"; // formattedmessage, lokalisaatioon
 import chipslogo from "./media/chipstersfood_logo.png";
@@ -12,17 +13,17 @@ import { version } from "react";
 
 // etusivu, ohjeita yms.
 const Tervetuloa = (props) => {
+    const { open, handleOpen, handleClose } = useApi();
     const { locale } = props;
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
     const classes = useStyles();
 
   return (
         <ThemeProvider theme={theme}>
-            <div>
-            <div><FormattedMessage id="tervetuloa_otsikko" defaultMEssage="Otsikko"/></div>
-            <div><FormattedMessage id="tervetuloa_info" defaultMEssage="Info"/></div>
+            <div> 
+      <div className={classes.etusivuTekstiContainer}>
+            <div className={classes.etusivuTeksti}><FormattedMessage id="tervetuloa_otsikko" defaultMEssage="Otsikko"/></div>
+            <div className={classes.etusivuTeksti}><FormattedMessage id="tervetuloa_info" defaultMEssage="Info"/></div>
+      </div>
             <div style={{ display: "flex" }}>
             <div style={{ width: "50%" }}>
                 <img

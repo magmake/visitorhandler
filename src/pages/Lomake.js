@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import useApi from "../api.js";
+import { apiUrl } from "../components/misc.js"
 import { TextField, Select, MenuItem, Button } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
-import { TextBoxOtsikko, WrappedTextBoxesTheme } from "../components/Textbox";
 import { lomakeOtsikko } from "../components/strings";
 import { useNavigate } from "react-router-dom";
 import MenuItems from "../components/MenuItems.js";
@@ -12,13 +13,15 @@ import useStyles from "../styles";
 // etusivu, ohjeita yms.
 const Lomake = ({ dateTime }) => {
   // lomakkeen tiedot
+    const { open, handleOpen, handleClose, submitData } = useApi();
+    const [muuOpen, setmuuOpen] = useState(false);
     const [etunimi, setEtunimi] = useState("");
     const [sukunimi, setSukunimi] = useState("");
     const [yritys, setYritys] = useState("");
     const [email, setEmail] = useState("");
     const [puhelinnumero, setPuhelinnumero] = useState("");
     const [vastuuhenkilo, setVastuuhenkilo] = useState("");
-    // Lomakkeen tilan tallentaminen, jos lomake täytetään vajaana ja palataan virheestä. Tämä ei ole pakollinen, disabled-tila ajaa saman asian.
+    // Lomakkeen tilan tallentaminen, jos lomake täytetään vajaana ja palataan virheestä. Tämä ei ole pakollinen, disabled-tila ajaa käytännössä saman asian.
     const [lomakkeenTila, setLomakkeenTila] = useState({
         etunimi: "",
         sukunimi: "",
@@ -26,12 +29,11 @@ const Lomake = ({ dateTime }) => {
         email: "",
         puhelinnumero: "",
         vastuuhenkilo: "",
+        omaVastuuhenkilo: "",
     });
-    
+        
     //lomakkeen kentät vajaat, Lähetä-nappi disabloidaan
     const [disabled, setDisabled] = useState(true);
-    // Modalin tila
-    const [open, setOpen] = useState(false);
     // Muu-valinnan omavastuuhenkilön tila
     const [omaVastuuhenkilo, setOmavastuuhenkilo] = useState("");
     // Viesti lomakkeen lähetyksestä
@@ -70,27 +72,18 @@ const Lomake = ({ dateTime }) => {
   //navigointi sivustolla
   const history = useNavigate();
 
-  //avataan peruutusmodal, jos peruutetaan lomakkeen täyttö
-  const handleCancel = () => {
-    setOpen(true);
-  };
-
-  // suljetaan peruutusmodal jos palataan peruutusikkunasta
-  const handleCloseModal = () => {
-    setOpen(false);
-  };
-
   //varmistetaan, haluaako käyttäjä peruuttaa -> palataan etusivulle
   const handleConfirmCancel = () => {
-    setOpen(false);
+    handleClose();
     history("/");
   };
+    
   // jos vastaanottavaa henkilöä ei löydy alasvetovalikosta, voi määritellä itse
  const handleChange = (event) => {
   const valittuVastuuhenkilo = event.target.value;
   if (valittuVastuuhenkilo === "Muu") {
     setNaytaMuuVastuuhenkiloKentta(true);
-    setVastuuhenkilo("");
+    setVastuuhenkilo("Muu");
     setSelectOpen(true);
   } else {
     setNaytaMuuVastuuhenkiloKentta(false);
@@ -107,8 +100,8 @@ const handleOmaVastuuhenkiloChange = (event) => {
 // käsittele "Muu"-vastuuhenkilön tekstikentän blur -tapahtuma
    const handleOmavastuuhenkiloBlur = () => {
     setVastuuhenkilo(omaVastuuhenkilo);
-    setOpen(false);
   };
+    //tarkistaa lomakkeen tilan, että onko kaikki kentät täytettynä. Ei välttämättä tarvitse tätä, koska "Lähetä"-nappi ei ole käytössä, jos lomake on vajaa. 
     const tarkistaLomake = () => {
         const tyhjatKentat = [etunimi, sukunimi, yritys, email, puhelinnumero, vastuuhenkilo].filter((kentta) => kentta === "");
             if (tyhjatKentat.length > 0) {
@@ -117,28 +110,30 @@ const handleOmaVastuuhenkiloChange = (event) => {
         }
             return true;
     };
+    //Palauttaa jo täytetyt arvot lomakkeeseen.
     const tallennaLomakkeenTila = (event) => {
   const { name, value } = event.target;
-  setLomakkeenTila((prevTila) => ({
-    ...prevTila,
-    [name]: value,
-  }));
-};
+    setLomakkeenTila((prevTila) => ({
+        ...prevTila,
+        [name]: value,
+        }));
+    };
     
+    //määritellään lomakkeen tila, vastuuhenkilö on joko listasta valittu tai jos "Muu", niin itse keksitty
     const handleSubmit = async (event) => {
          if (!tarkistaLomake()) {
         event.preventDefault();
-    setLomakkeenTila({
-      ...lomakkeenTila,
-      etunimi,
-      sukunimi,
-      yritys,
-      email,
-      puhelinnumero,
-      vastuuhenkilo,
-    });
-    return;
-  }
+        setLomakkeenTila({
+        ...lomakkeenTila,
+        etunimi,
+        sukunimi,
+        yritys,
+        email,
+        puhelinnumero,
+        vastuuhenkilo: vastuuhenkilo === "Muu" ? omaVastuuhenkilo : vastuuhenkilo, omaVastuuhenkilo,
+        });
+        return;
+    }
      
 
         
@@ -149,6 +144,7 @@ const handleOmaVastuuhenkiloChange = (event) => {
     }, 3000); // piilota ilmoitus 3 sekunnin kuluttua
          if (!tarkistaLomake()) {
             setLomakkeenTila({ etunimi, sukunimi, yritys, email, puhelinnumero, vastuuhenkilo });
+            const tyhjatKentat = Object.values(lomakkeenTila).some((kentta) => kentta === "");
             return
 
     }
@@ -156,6 +152,7 @@ const handleOmaVastuuhenkiloChange = (event) => {
     setEilahetetty(false);
     setLahetetty(false);
 
+        // tehdään json ja määritellään jsonin_nimi
     const tiedot = {
       etunimi,
       sukunimi,
@@ -171,45 +168,38 @@ const handleOmaVastuuhenkiloChange = (event) => {
     formData.append("tiedot", JSON.stringify(tiedot, null, 2));
     formData.append("jsonNimi", jsonTiedot);
 
-    try {
-      const response = await fetch("https://172.17.166.55:443", {
-        method: "POST",
-        body: formData,
-      });
-      setLahetetty(true);
-      console.log(response);
-    } catch (error) {
-      setEilahetetty(error.message);
-      console.log(error);
-    }
+        //lähetä formData palvelimelle
+   try {
+    const response = await submitData(formData, apiUrl);
+    setLahetetty(true);
+    console.log(response);
+  } catch (error) {
+    setEilahetetty(error.message);
+    console.log(error);
+  }
   };
     
 
   return (
     <div>
-      <WrappedTextBoxesTheme>
-        <TextBoxOtsikko text={lomakeOtsikko}></TextBoxOtsikko>
-      </WrappedTextBoxesTheme>
+        <div>{lomakeOtsikko}</div>
       <form className={classes.form} onSubmit={handleSubmit}>
         <TextField
           label="Etunimi"
           className={classes.field}
           value={etunimi}
-            defaultValue={lomakkeenTila.etunimi}
           onChange={(event) => setEtunimi(event.target.value)}
         />
         <TextField
           label="Sukunimi"
           className={classes.field}
           value={sukunimi}
-        defaultValue={lomakkeenTila.sukunimi}
           onChange={(event) => setSukunimi(event.target.value)}
         />
         <TextField
           label="Yritys"
           className={classes.field}
           value={yritys}
-        defaultValue={lomakkeenTila.yritys}
           onChange={(event) => setYritys(event.target.value)}
         />
         <TextField
@@ -217,7 +207,6 @@ const handleOmaVastuuhenkiloChange = (event) => {
           type="email"
           className={classes.field}
           value={email}
-        defaultValue={lomakkeenTila.email}
           inputProps={{
             pattern: "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$",
             title: "Syötä sähköpostiosoite muodossa esimerkki@esim.fi",
@@ -229,7 +218,6 @@ const handleOmaVastuuhenkiloChange = (event) => {
           type="tel"
           className={classes.field}
           value={puhelinnumero}
-        defaultValue={lomakkeenTila.puhelinnumero}
           inputProps={{
             pattern: "^\\+?[0-9]{2,}$",
             title: "Syötä oikea puhelinnumero",
@@ -242,7 +230,6 @@ const handleOmaVastuuhenkiloChange = (event) => {
         <Select
             MenuProps={{ disablePortal: true }}
             value={vastuuhenkilo}
-        defaultValue={lomakkeenTila.vastuuhenkilo}
             className={classes.field}
             onChange={handleChange}
             onClose={() => setSelectOpen(false)}
@@ -257,17 +244,17 @@ const handleOmaVastuuhenkiloChange = (event) => {
         <TextField
             label="Muu vastuuhenkilö"
             className={classes.field}
-            value={vastuuhenkilo}
+            value={vastuuhenkilo === "Muu" ? omaVastuuhenkilo : vastuuhenkilo}
             onChange={handleOmaVastuuhenkiloChange}
             onBlur={handleOmavastuuhenkiloBlur}
             style={{ display: naytaMuuVastuuhenkiloKentta ? "block" : "none" }}
             />
         )}
-        <Button type="submit" className={classes.field} disabled={disabled}>
-  Lähetä
-</Button>
+        <Button type="submit" disabled={disabled} className={classes.avausNappiTeema}>
+        Lähetä
+    </Button>
       </form>
-      <Button className={classes.cancelButton} onClick={handleCancel}>
+      <Button className={classes.cancelButton} onClick={handleOpen}>
         Peruuta
       </Button>
       {naytaLomakeViesti && (
@@ -278,7 +265,7 @@ const handleOmaVastuuhenkiloChange = (event) => {
           )}
         </div>
       )}
-      <Modal open={open} onClose={handleCloseModal}>
+      <Modal open={open} onClose={handleClose}>
         <div className={classes.modal}>
           <h2>Haluatko varmasti peruuttaa lomakkeen täyttämisen?</h2>
           <div className={classes.buttonContainerLomake}>
@@ -290,7 +277,7 @@ const handleOmaVastuuhenkiloChange = (event) => {
               Kyllä
             </Button>
             <Button
-              onClick={handleCloseModal}
+              onClick={handleClose}
               variant="contained"
               color="secondary"
             >

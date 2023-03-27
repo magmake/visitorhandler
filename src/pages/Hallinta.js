@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import useApi from "../api.js";
+import { apiUrl } from "../components/misc.js"
 import { Button, Modal, Card, CardContent } from "@material-ui/core";
 import useStyles from "../styles";
 import DatePicker from "react-datepicker";
@@ -7,34 +9,23 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 
 const Hallinta = () => {
-  const [data, setData] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [open, setOpen] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const classes = useStyles();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("https://172.17.166.55:443/data");
-        const jsonData = await response.json();
+    const { open, handleOpen, handleClose, fetchData } = useApi();
+    const [data, setData] = useState([]);
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const classes = useStyles();
+    
+    useEffect(() => {
+    const getData = async () => {
+      const jsonData = await fetchData(apiUrl + "/data");
+      if (jsonData) {
         setData(jsonData);
-      } catch (error) {
-        console.log(error);
       }
     };
-    fetchData();
+    getData();
   }, []);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   //datepickerin handler
   const handleDateChange = (date) => {
@@ -62,7 +53,7 @@ const Hallinta = () => {
     }
   };
   return (
-    <div>
+    <div className={classes.hallintaCentered}>
       <h1>Hallintapaneeli</h1>
       
 
@@ -76,15 +67,16 @@ const Hallinta = () => {
 
         {loggedIn ? (
         
-      <div>
+      <div className={classes.hallintaCentered}>
           <div className={classes.datePickerContainer}>
-            <p className={classes.datePickerText}>valitse päivämäärä</p>
+            <div className={classes.datePickerText}>valitse päivämäärä</div>
             <DatePicker
               selected={selectedDate}
               onChange={handleDateChange}
               dateFormat="dd.MM.yyyy"
             />
           </div>
+      <div className={classes.hallintaCentered}>
           {filteredData.map((item) => (
             <Card key={item.uniqueId} className={classes.hallintaCard}>
               <CardContent>
@@ -102,6 +94,7 @@ const Hallinta = () => {
             </Card>
           ))}
         </div>
+</div>
       ) : (
         <div>
           <div>

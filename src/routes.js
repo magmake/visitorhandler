@@ -1,25 +1,27 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Tervetuloa from "./pages/Tervetuloa";
 import Ohjesivu from "./pages/Ohjesivu";
+import Lomake from "./pages/Lomake";
+import Hallinta from "./pages/Hallinta";
 
-const routes = [
-  { path: "/", component: Tervetuloa, exact: true },
-  { path: "/ohjesivu", component: Ohjesivu },
+
+//Routet, dateTime on kellonaika, joka lähtee lomakkeen lähetyksen mukana
+const RouteConfig = (props) => {
+    const {dateTime} = props;
+    
+    const routes =[
+    { path: "/", element: <Tervetuloa/> },
+    { path: "/ohjesivu", element: <Ohjesivu/> },
+    { path: "/lomake", element: <Lomake dateTime={dateTime}/> },
+    { path: "/hallinta", element: <Hallinta/> },
 ];
-
-const RouteConfig = () => {
   return (
-    <>
+    <Routes>
       {routes.map((route, i) => (
-        <Route
-          key={i}
-          path={route.path}
-          component={route.component}
-          exact={route.exact}
-        />
+        <Route key={i} path={route.path} element={route.element} />
       ))}
-    </>
+    </Routes>
   );
 };
 

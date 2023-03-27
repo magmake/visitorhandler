@@ -36,7 +36,9 @@ const TermsOfService = ({ handleClose, open, locale }) => {
         >
         <div className={classes.container}>
           <div className={classes.modalContent}>
-            <h2><FormattedMessage id="ohjemodal_otsikko" defaultMEssage="Tietosuojaseloste"/></h2>
+              <div className={classes.centeredContainer}>
+            <div className={classes.modalOtsikko}><FormattedMessage id="ohjemodal_otsikko" defaultMEssage="Tietosuojaseloste"/></div>
+                </div>
             <p>{tietosuojaseloste_teksti}</p>
             <div>
               <div className={classes.centeredContainer}>

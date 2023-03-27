@@ -4,13 +4,6 @@ import messages from "../locales.js"; // tuodaan lokalisaatiotekstit
 import { FormattedMessage } from "react-intl"; // formattedmessage, lokalisaatioon
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import { TextBoxOtsikko, TextBoxTeksti } from "../components/Textbox";
-import {
-  ohjeita1_fin,
-  ohjeita2_fin,
-  ohjeita3_fin,
-  ohjeita4_fin,
-} from "../components/strings";
 
 // etusivu, ohjeita yms.
 const Ohjesivu = (props) => {

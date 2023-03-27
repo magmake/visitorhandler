@@ -6,12 +6,7 @@ const useStyles = makeStyles((theme) => ({
     width: "70%",
     marginTop: "1vh",
   },
-  container: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    height: "1vh",
-  },
+//ohjesivu
   ohjeContainer: {
     display: "flex",
     alignItems: "center",
@@ -41,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
     overflowY: "auto",
     margin: "auto",
   },
+    modalOtsikko: {
+      fontSize: "1.8rem",  
+    },
   centeredContainer: {
     display: "flex",
     alignItems: "center",
@@ -86,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: "none",
   },
-  //etusivun avausnappi
+  //etusivu
   avausNappiTeema: {
     fontWeight: "bold",
     border: "solid black",
@@ -101,6 +99,12 @@ const useStyles = makeStyles((theme) => ({
       color: "rgb(255, 255, 255)",
     },
   },
+    etusivuTekstiContainer : {
+        marginTop: "2%",
+    },
+    etusivuTeksti : {
+        fontSize: "1.5rem",
+    },
   //lomake
   form: {
     display: "flex",
@@ -154,8 +158,8 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    margin: "5px",
-    height: "5vh",
+    margin: "10px",
+    height: "8vh",
   },
   datePickerText: {
     margin: 0,
@@ -182,7 +186,6 @@ const useStyles = makeStyles((theme) => ({
     width: "50%",
     flexGrow: 1,
     display: "flex",
-    flexDirection: "column",
     justifyContent: "center",
     textAlign: "left",
     alignItems: "flex-start",
@@ -192,6 +195,8 @@ const useStyles = makeStyles((theme) => ({
   },
     hallintaCentered: {
         display: "flex",
+        width: "100%",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
     },
@@ -202,6 +207,10 @@ const useStyles = makeStyles((theme) => ({
     hallintaInput: {
     margin: "0 10px",
   },
+    datePickerText: {
+      display: "flex",
+        marginTop: "20%",
+    },
   hallintaModal: {
     display: "flex",
     alignItems: "center",

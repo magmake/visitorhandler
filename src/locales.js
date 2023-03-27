@@ -7,7 +7,7 @@ const locales = {
         ohjesivu_ohje2: "Poista sormukset, korut, näkyvät lävistykset ja kellot ennen tuotantoon siirtymistä. Sovi säilytyspaikasta isäntäsi kanssa.",
         ohjesivu_ohje3: "Pese ja desinfioi kädet ennen tuotantotiloihin menoa isännän antaman mallin mukaisesti.",
         ohjesivu_ohje4: "Pakkamattomiin tuotteisiin ei saa koskea kierroksella. Pakattuihin tuotteisiin ei saa koskea ilman isännän lupaa. Valmistuspintoihin ei saa koskea ilman isännän lupaa. Tuotteita ei                                   saa syödä kierroksen aikana. Tupakointi ja nuuskan käyttö tehtaassa on kielletty.",
-        ohjemodal_otsikko: "Tietosuoja",
+        ohjemodal_otsikko: "Tietosuojalauseke",
         ohjemodal_seloste: "",
         ohjemodal_hyväksy: "Hyväksyn ehdot",
         ohjemodal_enhyväksy: "En hyväksy",

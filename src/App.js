@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
-import ClockBar from "./fragments/Clockbar";
+import ClockBar from "./addons/Clockbar";
 import { IntlProvider } from "react-intl";
-import Tervetuloa from "./pages/Tervetuloa";
 import { FormattedMessage } from "react-intl"; // formattedmessage, lokalisaatioon
 import messages from "./locales.js"; // tuodaan lokalisaatiotekstit
 import tonnikala from "./pages/media/tonnikala.jpg";
-import Hallinta from "./pages/Hallinta";
-import Ohjesivu from "./pages/Ohjesivu";
-import Lomake from "./pages/Lomake";
+import RouteConfig from "./routes";
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
 import "./App.css";
 import { Box } from "@material-ui/core";
 
 //otetaan kellonaika ja päivämäärä sekunnin välein
-const App = () => {
+const App = (props) => {
   const [dateTime, setDateTime] = useState(new Date());
     const [locale, setLocale] = useState("fi"); // oletuskieli
     const isEtusivu = location.pathname === "/";
@@ -62,12 +59,7 @@ const App = () => {
             </select>
         </div>
           </header>
-          <Routes>
-            <Route path="/" element={<Tervetuloa />} />
-            <Route path="/ohjesivu" element={<Ohjesivu />} />
-            <Route path="/lomake" element={<Lomake dateTime={dateTime} />} />
-            <Route path="/hallinta" element={<Hallinta />} />
-          </Routes>
+            <RouteConfig dateTime={dateTime} />
         </Router>
       </div>
     </div>
