@@ -13,7 +13,8 @@ const locales = {
         ohjemodal_enhyväksy: "En hyväksy",
         ohjesivu_olenlukenut: "Olen lukenut ohjeet",
         ohjesivu_jatka: "Jatka",
-        ohjesivu_poistu: "Poistu"
+        ohjesivu_poistu: "Poistu",
+        kielivalinta_ok: "Valinta ok"
 
 
     },
@@ -31,10 +32,11 @@ const locales = {
         ohjemodal_enhyväksy: "I do not accept",
         ohjesivu_olenlukenut: "I have read the instructions",
         ohjesivu_jatka: "Continue",
-        ohjesivu_poistu: "Exit"
+        ohjesivu_poistu: "Exit",
+        kielivalinta_ok: "Choice ok"
 
     },
-    se: {
+    sv: {
         tervetuloa_otsikko: "Välkommen till Ab Chipsters Food Oy:s produktionsanläggning. Vi hoppas att du trivs under ditt besök.",
         tervetuloa_info: "För att säkerställa livsmedelssäkerhet och hög produktkvalitet ber vi dig vänligen följa våra hygieninstruktioner.",
         tervetuloa_sisään: "Gå in",
@@ -48,7 +50,8 @@ const locales = {
         ohjemodal_enhyväksy: "Jag godkänner inte",
         ohjesivu_olenlukenut: "Jag har läst instruktionerna",
         ohjesivu_jatka: "Förtsätt",
-        ohjesivu_poistu: "Avsluta"
+        ohjesivu_poistu: "Avsluta",
+        kielivalinta_ok: "Kom in"
     }
 }
 

@@ -8,6 +8,7 @@ import RouteConfig from "./routes";
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
 import "./App.css";
 import { Box } from "@material-ui/core";
+import Kielivalinta from "./pages/Kielivalinta";
 
 //otetaan kellonaika ja päivämäärä sekunnin välein
 const App = (props) => {
@@ -55,11 +56,11 @@ const App = (props) => {
                 >
             <option value="fi">Suomi</option>
             <option value="en">English</option>
-            <option value="se">Svenska</option>
+            <option value="sv">Svenska</option>
             </select>
         </div>
           </header>
-            <RouteConfig dateTime={dateTime} />
+            <RouteConfig dateTime={dateTime} changeLocale={changeLocale} locale={locale} />
         </Router>
       </div>
     </div>

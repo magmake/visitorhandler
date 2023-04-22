@@ -42,12 +42,12 @@ const Tervetuloa = (props) => {
 
           <Terms open={open} handleClose={handleClose}></Terms>
         </div>
-        <div>
+        <div className={classes.nappiContainer}>
           <Button
             variant="contained"
             color="primary"
             onClick={handleOpen}
-            className={classes.avausNappiTeema}
+            className={classes.nappiTeema}
           >
             <FormattedMessage id="tervetuloa_sisään" defaultMEssage="Sisään"/>
           </Button>

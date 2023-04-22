@@ -1,11 +1,17 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  //ohjesivu
   root: {
     width: "70%",
     marginTop: "1vh",
   },
+    kieliSivuOtsikko: {
+    fontSize: "1.2rem",
+    fontWeight: 500, 
+    },
+    kieliSivuContainer: {
+    marginTop: "5vh",
+},
 //ohjesivu
   ohjeContainer: {
     display: "flex",
@@ -41,9 +47,9 @@ const useStyles = makeStyles((theme) => ({
     },
   centeredContainer: {
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    height: "2vh",
   },
   buttonContainer: {
     display: "flex",
@@ -53,7 +59,6 @@ const useStyles = makeStyles((theme) => ({
   },
   leftButton: {
     backgroundColor: "green",
-    color: "white",
     fontWeight: "bold",
     border: "solid black",
     borderRadius: "10px",
@@ -70,7 +75,6 @@ const useStyles = makeStyles((theme) => ({
   },
   rightButton: {
     backgroundColor: "red",
-    color: "white",
     border: "solid black",
     borderRadius: "10px",
     padding: "10px 20px",
@@ -84,21 +88,23 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: "none",
   },
-  //etusivu
-  avausNappiTeema: {
+  nappiContainer: {
+      marginTop: "10vh",
+      padding: "10px 0px",
+      alignItems: "center",
+  },
+  nappiTeema: {
     fontWeight: "bold",
     border: "solid black",
-    borderRadius: "10px",
-    padding: "10px 20px",
-    marginTop: "10vh",
+    borderRadius: "5px",
     fontSize: "1.2rem",
     textDecoration: "none",
     "&:hover": {
       cursor: "pointer",
       backgroundColor: theme.palette.primary.main,
-      color: "rgb(255, 255, 255)",
     },
   },
+    //etusivu
     etusivuTekstiContainer : {
         marginTop: "2%",
     },
@@ -116,8 +122,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "5px 0",
   },
   cancelButton: {
-    position: "center",
-    bottom: "-20vh",
+    display: "flex",
     backgroundColor: "red",
     color: "white",
     border: "solid black",
@@ -142,7 +147,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     marginTop: theme.spacing(2),
   },
-      valitseOtsikko: {
+    valitseOtsikko: {
     fontSize: "1.2rem",
     fontWeight: 500,
     marginTop: theme.spacing(2),

@@ -33,16 +33,17 @@ const Ohjesivu = (props) => {
                 <label><FormattedMessage id="ohjesivu_olenlukenut" defaultMEssage="Olen lukenut ohjeet"/></label>
               </div>
       <div className={classes.buttonContainer}>
-        <div>
+         <div>
           <Link to="/lomake" className={classes.link}>
-            <Button variant="contained" className={classes.avausNappiTeema} disabled={!isChecked}>
+             
+            <Button variant="contained" className={classes.leftButton} disabled={!isChecked}>
               <FormattedMessage id="ohjesivu_jatka" defaultMEssage="Jatka"/>
             </Button>
           </Link>
         </div>
         <div>
           <Link to="/" className={classes.link}>
-            <Button variant="contained" className={classes.avausNappiTeema}>
+            <Button variant="contained" className={classes.rightButton}>
               <FormattedMessage id="ohjesivu_poistu" defaultMEssage="Jatka"/>
             </Button>
           </Link>
