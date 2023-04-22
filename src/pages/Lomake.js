@@ -61,7 +61,7 @@ const Lomake = ({ dateTime }) => {
     second: "2-digit",
   });
     
-    
+    //katsotaan lomakkeen tila, onko täytetty vai ei
     useEffect(() => {
         const hasEmptyFields = [etunimi, sukunimi, yritys, email, puhelinnumero, vastuuhenkilo].some((field) => field === "");
         setDisabled(hasEmptyFields);
@@ -151,6 +151,7 @@ const handleOmaVastuuhenkiloChange = (event) => {
 
     setEilahetetty(false);
     setLahetetty(false);
+    history("/");
 
         // tehdään json ja määritellään jsonin_nimi
     const tiedot = {
@@ -250,13 +251,21 @@ const handleOmaVastuuhenkiloChange = (event) => {
             style={{ display: naytaMuuVastuuhenkiloKentta ? "block" : "none" }}
             />
         )}
-        <Button type="submit" disabled={disabled} className={classes.avausNappiTeema}>
+<div className={classes.centeredContainer}>
+<div className={classes.buttonContainer}>
+        <Button type="submit" disabled={disabled} variant="contained" className={classes.nappiTeema}>
         Lähetä
     </Button>
-      </form>
-      <Button className={classes.cancelButton} onClick={handleOpen}>
+
+</div>
+<div className={classes.buttonContainer}>
+      <Button className={classes.cancelButton} variant="contained" onClick={handleOpen}>
         Peruuta
       </Button>
+    </div>
+</div>
+      </form>
+
       {naytaLomakeViesti && (
         <div>
           {lomakeLahetetty && <p>Lomake lähetetty onnistuneesti!</p>}
